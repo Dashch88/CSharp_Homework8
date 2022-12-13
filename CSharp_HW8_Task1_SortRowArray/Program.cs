@@ -43,11 +43,11 @@ int[,] Sort2DimArray(int[,] arrayForSorting)
     {
         // сортировка расчёской
         int step = arrayForSorting.GetLength(1) - 1;
-        while (step >= 1)
+        while (step > 1)
         {
             for (int j = 0; j + step < arrayForSorting.GetLength(1); j++)
             {
-                if (arrayForSorting[i, j] > arrayForSorting[i, j + step])
+                if (arrayForSorting[i, j] < arrayForSorting[i, j + step])
                 {
                     int temp = arrayForSorting[i, j];
                     arrayForSorting[i, j] = arrayForSorting[i, j + step];
@@ -60,14 +60,21 @@ int[,] Sort2DimArray(int[,] arrayForSorting)
         // сортировка пузырьковая
         for (int j = 1; j < arrayForSorting.GetLength(1); j++)
         {
+            bool swapFlag = false;
             for (int k = 0; k < arrayForSorting.GetLength(1) - j; k++)
             {
-                if (arrayForSorting[i, k] > arrayForSorting[i, k + 1])
+                if (arrayForSorting[i, k] < arrayForSorting[i, k + 1])
                 {
                     int temp = arrayForSorting[i, k];
                     arrayForSorting[i, k] = arrayForSorting[i, k + 1];
                     arrayForSorting[i, k + 1] = temp;
+                    swapFlag = true;
                 }
+            }
+
+            if (!swapFlag)
+            {
+                break;
             }
         }
     }
